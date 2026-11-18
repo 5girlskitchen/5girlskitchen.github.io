@@ -6,13 +6,13 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta property="og:title" content="5 Girls Kitchen">
-<meta property="og:description" content="Homemade sourdough, whole wheat bread, cinnamon rolls, chocolate chip cookies &amp; pizza crust made with fresh-milled flour. Order 2 days ahead, pickup in Kingsburg, CA.">
+<meta property="og:description" content="Homemade sourdough, whole wheat bread, cinnamon rolls, chocolate chip cookies, scones &amp; pizza crust made with fresh-milled flour. Order 2 days ahead, pickup in Kingsburg, CA.">
 <meta property="og:image" content="share-image.png">
 <meta name="theme-color" content="#5F6F52">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>5 Girls Kitchen</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="5 Girls Kitchen — sourdough bread, whole wheat bread, cinnamon rolls, chocolate chip cookies and pizza crust made with fresh-milled flour. Order 2 days ahead, pickup in Kingsburg.">
+<meta name="description" content="5 Girls Kitchen — sourdough bread, whole wheat bread, cinnamon rolls, chocolate chip cookies, scones and pizza crust made with fresh-milled flour. Order 2 days ahead, pickup in Kingsburg.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=Inter:wght@400;500;600&display=swap">
 <style>
@@ -173,6 +173,12 @@ footer small{color:var(--ink-soft)}
           <p class="price">$10 / dozen</p>
         </article>
         <article class="card">
+          <svg viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 46Q11 40 15 35L28 18Q32 13 36 18L49 35Q53 40 52 46Q32 52 12 46Z"/><circle cx="27" cy="36" r="1"/><circle cx="36" cy="31" r="1"/><circle cx="34" cy="41" r="1"/></svg>
+          <h3>Scones</h3>
+          <p>Tender and buttery. Flavors rotate, so ask about this week&#39;s flavor</p>
+          <p class="price">$20 / dozen</p>
+        </article>
+        <article class="card">
           <svg viewBox="0 0 64 64" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M32 54L13 17Q32 8 51 17Z"/><path d="M16 23Q32 15 48 23"/></svg>
           <h3>Pizza Crust</h3>
           <p>Par-baked crust. Add your toppings and finish it in your oven</p>
@@ -217,6 +223,10 @@ footer small{color:var(--ink-soft)}
           <div class="qty"><button type="button" data-step="-1" data-for="q-cookies" aria-label="One less dozen cookies">−</button><input id="q-cookies" type="number" min="0" max="50" value="0" inputmode="numeric" data-price="10" data-name="dozen chocolate chip cookies" data-plural="dozen chocolate chip cookies"><button type="button" data-step="1" data-for="q-cookies" aria-label="One more dozen cookies">+</button></div>
         </div>
         <div class="row">
+          <label for="q-scones"><span>Scones</span><small>$20 per dozen</small></label>
+          <div class="qty"><button type="button" data-step="-1" data-for="q-scones" aria-label="One less dozen scones">−</button><input id="q-scones" type="number" min="0" max="50" value="0" inputmode="numeric" data-price="20" data-name="dozen scones" data-plural="dozen scones"><button type="button" data-step="1" data-for="q-scones" aria-label="One more dozen scones">+</button></div>
+        </div>
+        <div class="row">
           <label for="q-pizza"><span>Pizza Crust</span><small>$10 per pack of 2</small></label>
           <div class="qty"><button type="button" data-step="-1" data-for="q-pizza" aria-label="One less pack of pizza crusts">−</button><input id="q-pizza" type="number" min="0" max="50" value="0" inputmode="numeric" data-price="10" data-name="pack of 2 pizza crusts" data-plural="packs of 2 pizza crusts"><button type="button" data-step="1" data-for="q-pizza" aria-label="One more pack of pizza crusts">+</button></div>
         </div>
@@ -233,7 +243,7 @@ footer small{color:var(--ink-soft)}
           <label for="o-time">Pickup time</label>
           <select id="o-time"><option>12 PM</option><option>1 PM</option><option>2 PM</option><option>3 PM</option><option>4 PM</option><option>5 PM</option><option>6 PM</option></select>
         </div>
-        <div class="total"><span>Total</span><output id="total" for="q-sourdough q-wheat q-rolls q-cookies q-pizza">$0</output></div>
+        <div class="total"><span>Total</span><output id="total" for="q-sourdough q-wheat q-rolls q-cookies q-scones q-pizza">$0</output></div>
         <p class="msg" id="msg" aria-live="polite"></p>
         <div class="actions">
           <a class="btn btn-primary" id="sms" href="sms:5599722631">Text this order</a>
@@ -254,7 +264,7 @@ footer small{color:var(--ink-soft)}
 
 <script>
 (function(){
-  var ids=['q-sourdough','q-wheat','q-rolls','q-cookies','q-pizza'];
+  var ids=['q-sourdough','q-wheat','q-rolls','q-cookies','q-scones','q-pizza'];
   var form=document.getElementById('order-form');
   function val(id){var n=parseInt(document.getElementById(id).value,10);return isNaN(n)||n<0?0:Math.min(n,50);}
   function update(){
