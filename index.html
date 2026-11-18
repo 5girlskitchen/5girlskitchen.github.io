@@ -115,6 +115,7 @@ p{margin:0}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:600 16px var(--body);text-decoration:none;cursor:pointer;border:2px solid transparent}
 .btn-primary{background:var(--rust);color:var(--cream)}
 .btn-primary:hover{background:var(--rust-deep)}
+.link-btn{background:none;border:0;padding:0;font:inherit;font-weight:600;color:var(--rust-text);text-decoration:underline;cursor:pointer}
 .btn-venmo{background:#008CFF;color:#fff}
 .btn-venmo:hover{background:#0074D4}
 .venmo{display:flex;flex-direction:column;gap:8px;padding-top:6px;border-top:1px solid var(--line)}
@@ -255,7 +256,8 @@ footer small{color:var(--ink-soft)}
         </div>
         <div class="venmo">
           <a class="btn btn-venmo" id="venmo" href="https://venmo.com/u/Rebekah-Torres-20" rel="noopener">Pay with Venmo</a>
-          <p class="note">Please pay after we confirm your order by text. Venmo: <b>@Rebekah-Torres-20</b></p>
+          <p class="note">Please pay after we confirm your order by text. Venmo: <b>@Rebekah-Torres-20</b> <button class="link-btn" type="button" id="copy-venmo">Copy username</button></p>
+          <p class="note">Button not opening Venmo? Some browsers, like Edge, block it. <a href="https://venmo.com/u/Rebekah-Torres-20" target="_blank" rel="noopener">Open Rebekah's Venmo page</a>, or search the username in the Venmo app.</p>
         </div>
         <p class="note" id="note">If the text button doesn't open your messages, copy the message and text it to (559) 972-2631.</p>
       </form>
@@ -317,6 +319,7 @@ footer small{color:var(--ink-soft)}
     var t=setTimeout(function(){if(!document.hidden)window.location.href='https://venmo.com/u/Rebekah-Torres-20';},1500);
     document.addEventListener('visibilitychange',function(){if(document.hidden)clearTimeout(t);},{once:true});
   });
+  document.getElementById('copy-venmo').addEventListener('click',function(){copy('@Rebekah-Torres-20',this,'Copy username');});
   document.getElementById('copy-msg').addEventListener('click',function(){copy(document.getElementById('msg').textContent,this,'Copy message');});
   document.getElementById('copy-phone').addEventListener('click',function(){copy('(559) 972-2631',this,'Copy number');});
   (function(){var d=new Date();d.setDate(d.getDate()+2);var m=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');document.getElementById('o-date').min=m;})();
