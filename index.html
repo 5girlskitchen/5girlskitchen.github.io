@@ -106,6 +106,7 @@ p{margin:0}
 .field{display:flex;flex-direction:column;gap:6px}
 .field label{font-weight:600;font-size:15px}
 .hint{font-size:13px;color:var(--ink-soft)}
+.hint.err{color:var(--rust-text);font-weight:600}
 .field input,.field select{height:46px;padding:0 12px;border:2px solid var(--line);border-radius:12px;font:16px var(--body);background:var(--card);color:var(--ink)}
 .total{display:flex;justify-content:space-between;align-items:baseline;font-weight:600;font-size:18px}
 .total output{font-family:var(--display);font-size:28px;color:var(--rust-text);font-variant-numeric:tabular-nums}
@@ -237,7 +238,7 @@ footer small{color:var(--ink-soft)}
         <div class="field">
           <label for="o-date">Pickup day</label>
           <input id="o-date" type="date">
-          <small class="hint">Choose a day at least 2 days from today.</small>
+          <small class="hint" id="date-hint" aria-live="polite">Choose a day at least 2 days from today. We&#39;re closed on Sundays.</small>
         </div>
         <div class="field">
           <label for="o-time">Pickup time</label>
@@ -303,6 +304,13 @@ footer small{color:var(--ink-soft)}
   document.getElementById('copy-msg').addEventListener('click',function(){copy(document.getElementById('msg').textContent,this,'Copy message');});
   document.getElementById('copy-phone').addEventListener('click',function(){copy('(559) 972-2631',this,'Copy number');});
   (function(){var d=new Date();d.setDate(d.getDate()+2);var m=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');document.getElementById('o-date').min=m;})();
+  var dateEl=document.getElementById('o-date'),hint=document.getElementById('date-hint'),hintText=hint.textContent;
+  dateEl.addEventListener('change',function(){
+    if(dateEl.value&&new Date(dateEl.value+'T12:00:00').getDay()===0){
+      dateEl.value='';hint.textContent='Sorry, we\u2019re closed on Sundays. Please pick another day.';hint.classList.add('err');
+    }else{hint.textContent=hintText;hint.classList.remove('err');}
+    update();
+  });
   update();
 })();
 </script>
