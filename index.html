@@ -254,7 +254,7 @@ footer small{color:var(--ink-soft)}
           <button class="btn btn-ghost" type="button" id="copy-msg">Copy message</button>
         </div>
         <div class="venmo">
-          <a class="btn btn-venmo" id="venmo" href="https://venmo.com/u/Rebekah-Torres-20" target="_blank" rel="noopener">Pay with Venmo</a>
+          <a class="btn btn-venmo" id="venmo" href="https://venmo.com/u/Rebekah-Torres-20" rel="noopener">Pay with Venmo</a>
           <p class="note">Please pay after we confirm your order by text. Venmo: <b>@Rebekah-Torres-20</b></p>
         </div>
         <p class="note" id="note">If the text button doesn't open your messages, copy the message and text it to (559) 972-2631.</p>
@@ -296,7 +296,9 @@ footer small{color:var(--ink-soft)}
     }
     document.getElementById('msg').textContent=text;
     var vnote='5 Girls Kitchen: '+(parts.length?parts.join(', '):'order')+(day?' \u2013 pickup '+day+' '+time:'');
-    document.getElementById('venmo').href=total>0?'https://venmo.com/Rebekah-Torres-20?txn=pay&amount='+total+'&note='+encodeURIComponent(vnote):'https://venmo.com/u/Rebekah-Torres-20';
+    var onPhone=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    var vq='txn=pay&recipients=Rebekah-Torres-20'+(total>0?'&amount='+total+'&note='+encodeURIComponent(vnote):'');
+    document.getElementById('venmo').href=onPhone?'venmo://paycharge?'+vq:'https://venmo.com/u/Rebekah-Torres-20';
     document.getElementById('sms').href='sms:5599722631?&body='+encodeURIComponent(parts.length?text:'');
   }
   form.addEventListener('click',function(e){
@@ -310,6 +312,11 @@ footer small{color:var(--ink-soft)}
     function done(ok){btn.textContent=ok?'Copied':'Select and copy';setTimeout(function(){btn.textContent=label;},1800);}
     try{navigator.clipboard.writeText(text).then(function(){done(true);},function(){done(false);});}catch(err){done(false);}
   }
+  document.getElementById('venmo').addEventListener('click',function(){
+    if(this.href.indexOf('venmo://')!==0)return;
+    var t=setTimeout(function(){if(!document.hidden)window.location.href='https://venmo.com/u/Rebekah-Torres-20';},1500);
+    document.addEventListener('visibilitychange',function(){if(document.hidden)clearTimeout(t);},{once:true});
+  });
   document.getElementById('copy-msg').addEventListener('click',function(){copy(document.getElementById('msg').textContent,this,'Copy message');});
   document.getElementById('copy-phone').addEventListener('click',function(){copy('(559) 972-2631',this,'Copy number');});
   (function(){var d=new Date();d.setDate(d.getDate()+2);var m=d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');document.getElementById('o-date').min=m;})();
