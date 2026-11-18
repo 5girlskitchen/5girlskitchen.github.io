@@ -115,6 +115,9 @@ p{margin:0}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 22px;border-radius:999px;font:600 16px var(--body);text-decoration:none;cursor:pointer;border:2px solid transparent}
 .btn-primary{background:var(--rust);color:var(--cream)}
 .btn-primary:hover{background:var(--rust-deep)}
+.btn-venmo{background:#008CFF;color:#fff}
+.btn-venmo:hover{background:#0074D4}
+.venmo{display:flex;flex-direction:column;gap:8px;padding-top:6px;border-top:1px solid var(--line)}
 .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line)}
 .btn-ghost:hover{border-color:var(--rust-text)}
 .btn-light{background:transparent;color:var(--band-ink);border-color:var(--cream-soft)}
@@ -250,6 +253,10 @@ footer small{color:var(--ink-soft)}
           <a class="btn btn-primary" id="sms" href="sms:5599722631">Text this order</a>
           <button class="btn btn-ghost" type="button" id="copy-msg">Copy message</button>
         </div>
+        <div class="venmo">
+          <a class="btn btn-venmo" id="venmo" href="https://venmo.com/u/Rebekah-Torres-20" target="_blank" rel="noopener">Pay with Venmo</a>
+          <p class="note">Please pay after we confirm your order by text. Venmo: <b>@Rebekah-Torres-20</b></p>
+        </div>
         <p class="note" id="note">If the text button doesn't open your messages, copy the message and text it to (559) 972-2631.</p>
       </form>
     </div>
@@ -288,6 +295,8 @@ footer small{color:var(--ink-soft)}
       if(name)text+=' — '+name;
     }
     document.getElementById('msg').textContent=text;
+    var vnote='5 Girls Kitchen: '+(parts.length?parts.join(', '):'order')+(day?' \u2013 pickup '+day+' '+time:'');
+    document.getElementById('venmo').href=total>0?'https://venmo.com/Rebekah-Torres-20?txn=pay&amount='+total+'&note='+encodeURIComponent(vnote):'https://venmo.com/u/Rebekah-Torres-20';
     document.getElementById('sms').href='sms:5599722631?&body='+encodeURIComponent(parts.length?text:'');
   }
   form.addEventListener('click',function(e){
