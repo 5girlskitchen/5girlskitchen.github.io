@@ -148,6 +148,19 @@ footer small{color:var(--ink-soft)}
 .leave p{color:var(--band-soft);max-width:60ch}
 .leave .btn-primary{background:var(--cream);color:var(--rust-deep)}
 .leave .btn-primary:hover{background:#fff}
+.rev-form{display:flex;flex-direction:column;gap:14px;width:100%;max-width:640px}
+.rev-form label{display:flex;flex-direction:column;gap:6px;font-weight:600;font-size:15px;color:var(--band-ink)}
+.rev-form .hint{font-weight:400;color:var(--band-soft);font-size:13px}
+.rev-form input[type=text],.rev-form select,.rev-form textarea{font:inherit;font-weight:400;font-size:16px;color:#2F3A2A;background:#FFFCF5;border:2px solid transparent;border-radius:12px;padding:11px 13px;min-height:46px;width:100%}
+.rev-form textarea{resize:vertical;min-height:110px}
+.rev-form input:focus-visible,.rev-form select:focus-visible,.rev-form textarea:focus-visible{outline:3px solid var(--cream-soft);outline-offset:2px}
+.rev-form .row2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:560px){.rev-form .row2{grid-template-columns:minmax(0,1fr)}}
+.rev-form .check{flex-direction:row;align-items:flex-start;gap:10px;font-weight:500;color:var(--band-soft)}
+.rev-form .check input{width:20px;height:20px;margin:2px 0 0;flex-shrink:0;accent-color:#5F6F52}
+.rev-form .btn-primary{align-self:flex-start;border:0;cursor:pointer;font:inherit;font-weight:600}
+.leave small a{color:var(--band-ink)}
+.leave .thanks{background:var(--cream);color:#2F3A2A;border-radius:12px;padding:12px 16px;font-weight:600}
 .leave small{color:var(--band-soft);font-size:13px}
 </style>
 </head>
@@ -185,11 +198,42 @@ footer small{color:var(--ink-soft)}
           <cite>Happy customer from Kingsburg · Cinnamon Rolls &amp; Cookies</cite>
         </article>
       </div>
-      <div class="leave">
+      <div class="leave" id="leave">
         <h2>Leave a review</h2>
-        <p>Tried our bread, rolls or cookies? We'd love to hear what you think. Text us your review with your first name and what you ordered.</p>
-        <a class="btn btn-primary" href="sms:5599722631?&amp;body=Review%20for%205%20Girls%20Kitchen%3A%20">Text a review</a>
-        <small>Or text it to (559) 972-2631. With your OK, we'll post your first name and review on this page.</small>
+        <p>Tried our bread, rolls or cookies? We'd love to hear what you think. Reviews are read by our family before they're posted.</p>
+        <p class="thanks" id="thanks" role="status" hidden>Thank you! We got your review and will post it soon.</p>
+        <form class="rev-form" action="https://formsubmit.co/JasonPTfamily@gmail.com" method="POST">
+          <input type="hidden" name="_subject" value="New review for 5 Girls Kitchen">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_next" value="https://5girlskitchen.com/reviews.html?thanks=1#leave">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
+          <div class="row2">
+            <label>Name to show <span class="hint">(first name, or “Happy customer”)</span>
+              <input type="text" name="Name" required maxlength="60" autocomplete="given-name">
+            </label>
+            <label>Town <span class="hint">(optional)</span>
+              <input type="text" name="Town" maxlength="40" placeholder="Kingsburg">
+            </label>
+          </div>
+          <label>What did you order?
+            <select name="Ordered" required>
+              <option value="" selected disabled>Choose one</option>
+              <option>Sourdough Bread</option>
+              <option>Whole Wheat Bread</option>
+              <option>Cinnamon Rolls</option>
+              <option>Chocolate Chip Cookies</option>
+              <option>Scones</option>
+              <option>Pizza Crust</option>
+              <option>More than one</option>
+            </select>
+          </label>
+          <label>Your review
+            <textarea name="Review" required rows="4" maxlength="800"></textarea>
+          </label>
+          <label class="check"><input type="checkbox" name="OK to post" value="Yes" required> It’s OK to post my review and name on this website.</label>
+          <button class="btn btn-primary" type="submit">Send review</button>
+        </form>
+        <small>Rather text it? <a href="sms:5599722631?&amp;body=Review%20for%205%20Girls%20Kitchen%3A%20">Text (559) 972-2631</a>.</small>
       </div>
     </div>
   </section>
@@ -201,5 +245,6 @@ footer small{color:var(--ink-soft)}
     <small>Bekah • Jamie • Katie • Christine • Kylee</small>
   </div>
 </footer>
+<script>try{if(new URLSearchParams(location.search).get("thanks")){document.getElementById("thanks").hidden=false;}}catch(e){}</script>
 </body>
 </html>
