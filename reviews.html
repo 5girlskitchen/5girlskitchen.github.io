@@ -138,6 +138,7 @@ footer small{color:var(--ink-soft)}
 @media (max-width:640px){.rev-list{grid-template-columns:minmax(0,1fr)}}
 .rev-card{background:var(--card);border:2px solid var(--line);border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px}
 .rev-card blockquote{margin:0;font-size:16px;line-height:1.55;color:var(--ink)}
+.rev-card:only-of-type{grid-column:1/-1}
 .rev-card cite{font-style:normal;font-weight:600;color:var(--rust-text);font-size:14px}
 .empty{grid-column:1/-1;text-align:center;background:var(--card);border:2px dashed var(--line);border-radius:20px;padding:36px 22px;display:flex;flex-direction:column;align-items:center;gap:8px}
 .empty h3{font-size:24px;font-weight:600}
@@ -179,10 +180,10 @@ footer small{color:var(--ink-soft)}
           <cite>First name · Product</cite>
         </article>
         -->
-        <div class="empty">
-          <h3>No reviews yet</h3>
-          <p>We just opened our kitchen. Be one of the first to tell us what you think!</p>
-        </div>
+        <article class="rev-card">
+          <blockquote>I LOVE THE CINNAMON ROLLS!!!! I couldn’t stop eating the cookies the other night but the cinnamon rolls are a next level. Amazing 🤩</blockquote>
+          <cite>Happy customer from Kingsburg · Cinnamon Rolls &amp; Cookies</cite>
+        </article>
       </div>
       <div class="leave">
         <h2>Leave a review</h2>
